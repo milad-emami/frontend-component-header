@@ -15,7 +15,6 @@
   }
 }
 
-
 .menu-dropdown-enter {
   opacity: 0;
   transform-origin: 75% 0;
@@ -42,4 +41,9 @@
   opacity: 0;
 }
 .menu-dropdown-exit-done {
+}
+.container-fluid {
+  max-width: 1204px;
+  padding-left: 32px;
+  padding-right: 32px;
 }
