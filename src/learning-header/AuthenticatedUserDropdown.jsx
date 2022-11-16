@@ -1,56 +1,68 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-
 import { getConfig } from '@edx/frontend-platform';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
-import { Dropdown } from '@edx/paragon';
+import { AppContext } from '@edx/frontend-platform/react';
+import { Menu, MenuTrigger, MenuContent } from '../Menu';
+import Avatar from '../Avatar';
+import { CaretIcon } from '../Icons';
 
 import messages from './messages';
 
 const AuthenticatedUserDropdown = ({ intl, username }) => {
-  const dashboardMenuItem = (
-    <Dropdown.Item href={`${getConfig().LMS_BASE_URL}/dashboard`}>
-      {intl.formatMessage(messages.dashboard)}
-    </Dropdown.Item>
-  );
+  const { authenticatedUser } = useContext(AppContext);
 
   return (
     <>
       <a className="text-gray-700 mr-3" href={`${getConfig().SUPPORT_URL}`}>
         {intl.formatMessage(messages.help)}
       </a>
-      <Dropdown className="user-dropdown">
-        <Dropdown.Toggle variant="outline-primary">
-          <FontAwesomeIcon
-            icon={faUserCircle}
-            className="d-md-none"
-            size="lg"
-          />
-          <span data-hj-suppress className="d-none d-md-inline">
-            {username}
-          </span>
-        </Dropdown.Toggle>
-        <Dropdown.Menu className="dropdown-menu-right custome-style">
-          {dashboardMenuItem}
-          <Dropdown.Item href={`${getConfig().LMS_BASE_URL}/u/${username}`}>
-            {intl.formatMessage(messages.profile)}
-          </Dropdown.Item>
-          <Dropdown.Item href={`${getConfig().LMS_BASE_URL}/account/settings`}>
-            {intl.formatMessage(messages.account)}
-          </Dropdown.Item>
-          {getConfig().ORDER_HISTORY_URL && (
-            <Dropdown.Item href={getConfig().ORDER_HISTORY_URL}>
-              {intl.formatMessage(messages.orderHistory)}
-            </Dropdown.Item>
+      <Menu transitionClassName="menu-dropdown" transitionTimeout={250}>
+        <MenuTrigger
+          tag="button"
+          aria-label={intl.formatMessage(
+            messages['header.label.account.menu.for'],
+            { username }
           )}
-          <Dropdown.Item href={getConfig().LOGOUT_URL}>
+          className="btn btn-outline-primary d-inline-flex align-items-center pl-2 pr-3"
+        >
+          <Avatar
+            size="1.5em"
+            src={authenticatedUser.avatar}
+            alt=""
+            className="mr-2"
+          />
+          {username} <CaretIcon role="img" aria-hidden focusable="false" />
+        </MenuTrigger>
+        <MenuContent className="mb-0 dropdown-menu show dropdown-menu-right pin-right shadow py-2">
+          <a
+            className="dropdown-item"
+            href={`${getConfig().LMS_BASE_URL}/dashboard`}
+          >
+            {intl.formatMessage(messages.dashboard)}
+          </a>
+          <a
+            className="dropdown-item"
+            href={`${getConfig().LMS_BASE_URL}/u/${username}`}
+          >
+            {intl.formatMessage(messages.profile)}
+          </a>
+          <a
+            className="dropdown-item"
+            href={`${getConfig().LMS_BASE_URL}/account/settings`}
+          >
+            {intl.formatMessage(messages.account)}
+          </a>
+          {getConfig().ORDER_HISTORY_URL && (
+            <a className="dropdown-item" href={getConfig().ORDER_HISTORY_URL}>
+              {intl.formatMessage(messages.orderHistory)}
+            </a>
+          )}
+          <a href={getConfig().LOGOUT_URL}>
             {intl.formatMessage(messages.signOut)}
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+          </a>
+        </MenuContent>
+      </Menu>
     </>
   );
 };
