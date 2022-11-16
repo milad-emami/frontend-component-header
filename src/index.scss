@@ -2,14 +2,13 @@ $spacer: 1rem;
 $blue: #007db8;
 $white: #fff;
 
+@import './learning-header/index.scss';
 @import './Menu/menu.scss';
 
 .dropdown-item a {
   text-decoration: none;
 }
-.custome-style {
-  min-width: 10rem !important;
-}
+
 .icon-button {
   display: inline-flex;
   line-height: 3rem;
@@ -22,6 +21,7 @@ $white: #fff;
   padding: 0.75rem;
   justify-content: center;
   align-items: center;
+
   &:hover,
   &:focus {
     background: rgba(0, 0, 0, 0.1);
@@ -45,6 +45,7 @@ $white: #fff;
   .user-dropdown {
     .btn {
       height: 3rem;
+
       @media (max-width: -1 + map-get($grid-breakpoints, 'sm')) {
         padding: 0 0.5rem;
       }
@@ -65,6 +66,7 @@ $white: #fff;
     text-decoration: none;
     cursor: pointer;
   }
+
   img {
     height: 1.5rem;
   }
@@ -73,9 +75,11 @@ $white: #fff;
 .site-header-desktop {
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
   background: $white;
+
   .nav-link {
     text-decoration: none;
   }
+
   .logo {
     display: block;
     box-sizing: content-box;
@@ -84,11 +88,13 @@ $white: #fff;
     height: 1.75rem;
     padding: 1rem 0;
     margin-right: 1rem;
+
     img {
       display: block;
       height: 100%;
     }
   }
+
   .main-nav {
     .nav-link {
       padding: 1.125rem 1rem;
@@ -96,6 +102,7 @@ $white: #fff;
       font-weight: 500;
       letter-spacing: 0.01em;
     }
+
     .nav-link:hover,
     .nav-link:focus,
     .nav-link.active,
@@ -103,8 +110,10 @@ $white: #fff;
       background: $component-active-bg;
       color: $component-active-color;
     }
+
     .menu {
       position: static;
+
       .menu-content {
         border-top: solid 2px $component-active-bg;
         left: 0;
@@ -116,6 +125,7 @@ $white: #fff;
       }
     }
   }
+
   .search-input {
     border-radius: $rounded-pill;
   }
