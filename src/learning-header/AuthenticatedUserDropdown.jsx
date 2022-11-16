@@ -19,15 +19,21 @@ const AuthenticatedUserDropdown = ({ intl, username }) => {
 
   return (
     <>
-      <a className="text-gray-700 mr-3" href={`${getConfig().SUPPORT_URL}`}>{intl.formatMessage(messages.help)}</a>
+      <a className="text-gray-700 mr-3" href={`${getConfig().SUPPORT_URL}`}>
+        {intl.formatMessage(messages.help)}
+      </a>
       <Dropdown className="user-dropdown">
         <Dropdown.Toggle variant="outline-primary">
-          <FontAwesomeIcon icon={faUserCircle} className="d-md-none" size="lg" />
+          <FontAwesomeIcon
+            icon={faUserCircle}
+            className="d-md-none"
+            size="lg"
+          />
           <span data-hj-suppress className="d-none d-md-inline">
             {username}
           </span>
         </Dropdown.Toggle>
-        <Dropdown.Menu className="dropdown-menu-right">
+        <Dropdown.Menu className="dropdown-menu-right custome-style">
           {dashboardMenuItem}
           <Dropdown.Item href={`${getConfig().LMS_BASE_URL}/u/${username}`}>
             {intl.formatMessage(messages.profile)}
@@ -35,7 +41,7 @@ const AuthenticatedUserDropdown = ({ intl, username }) => {
           <Dropdown.Item href={`${getConfig().LMS_BASE_URL}/account/settings`}>
             {intl.formatMessage(messages.account)}
           </Dropdown.Item>
-          { getConfig().ORDER_HISTORY_URL && (
+          {getConfig().ORDER_HISTORY_URL && (
             <Dropdown.Item href={getConfig().ORDER_HISTORY_URL}>
               {intl.formatMessage(messages.orderHistory)}
             </Dropdown.Item>
